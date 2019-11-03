@@ -8,10 +8,10 @@
       <v-list dense>
         <v-list-item link>
           <v-list-item-action>
-            <v-icon>mdi-filmstrip</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Ação</v-list-item-title>
+              <router-link to="/" tag="li">Home</router-link>
           </v-list-item-content>
         </v-list-item>
         <v-list-item link>
@@ -19,7 +19,15 @@
             <v-icon>mdi-filmstrip</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Comédia</v-list-item-title>
+            <router-link to="/about" tag="li">Ação</router-link>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-action>
+            <v-icon>mdi-filmstrip</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <router-link to="/about" tag="li">Comédia</router-link>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -34,11 +42,11 @@
     </v-app-bar>
 
     <v-content>
-      <!-- Conteúdo -->
+      <router-view/>
     </v-content>
 
     <v-footer app>
-      <span>José Desenvolvimento&copy; 2019</span>
+      <span>&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
