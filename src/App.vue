@@ -14,22 +14,16 @@
               <router-link to="/" tag="li">Home</router-link>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
+
+        <v-list-item v-for="(category, index) in categories" :key="index" link>
           <v-list-item-action>
             <v-icon>mdi-filmstrip</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <router-link to="/about" tag="li">Ação</router-link>
+            <router-link to="/about" tag="li">{{ category.name }}</router-link>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-filmstrip</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <router-link to="/about" tag="li">Comédia</router-link>
-          </v-list-item-content>
-        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -61,8 +55,15 @@
       drawer: null,
     }),
 
+    computed: {
+      categories () {
+        return this.$store.state.category.categoryList
+      }
+    },
+
     created () {
       this.$vuetify.theme.dark = true
+      this.$store.dispatch('getCategories')
     },
   }
 </script>
