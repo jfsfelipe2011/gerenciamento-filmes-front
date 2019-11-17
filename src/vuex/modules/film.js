@@ -23,6 +23,20 @@ export default {
             ).then(response => {
                 context.commit('updateFilmList', response.data)
             })
+        },
+        getFilmsByCategoryId (context, id) {
+            axios(
+                {
+                    method: "GET",
+                    "url": process.env.VUE_APP_API_URL + '/api/films?filter=category_id,' + id,
+                    "headers": {
+                        "Accept":        "application/json",
+                        "Authorization": "Bearer " + localStorage.token
+                    }
+                }
+            ).then(response => {
+                    context.commit('updateFilmList', response.data)
+            })
         }
     }
 }

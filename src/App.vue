@@ -20,7 +20,7 @@
             <v-icon>mdi-filmstrip</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <router-link to="/about" tag="li">{{ category.name }}</router-link>
+            <router-link :to="'/films/' + category.id" tag="li">{{ category.name }}</router-link>
           </v-list-item-content>
         </v-list-item>
 
