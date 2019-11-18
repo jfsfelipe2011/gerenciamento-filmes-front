@@ -4,7 +4,7 @@
             <v-flex xs10>
                 <v-container fluid>
                     <h1 class="display-1 font-weight-bold mb-5">
-                        Filmes da categoria X
+                        Filmes da categoria {{ category.name }}
                     </h1>
 
                     <v-row dense>
@@ -55,16 +55,21 @@
             films () {
                 if (localStorage.categoryId !== this.$route.params.categoryId) {
                     this.$store.dispatch('getFilmsByCategoryId', this.$route.params.categoryId)
+                    this.$store.dispatch('getCategory', this.$route.params.categoryId)
 
                     localStorage.categoryId = this.$route.params.categoryId;
                 }
                 return this.$store.state.film.filmList
+            },
+            category () {
+                return this.$store.state.category.categoryView
             }
         },
 
         created() {
             localStorage.categoryId = this.$route.params.categoryId;
             this.$store.dispatch('getFilmsByCategoryId', this.$route.params.categoryId)
+            this.$store.dispatch('getCategory', this.$route.params.categoryId)
         }
     }
 </script>
