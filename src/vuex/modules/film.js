@@ -2,11 +2,15 @@ import axios from 'axios'
 
 export default {
     state: {
-        filmList: []
+        filmList: [],
+        filmView: {}
     },
     mutations: {
         updateFilmList (state, data) {
             state.filmList = data
+        },
+        updateFilmView (state, data) {
+            state.filmView = data
         }
     },
     actions: {
@@ -36,6 +40,20 @@ export default {
                 }
             ).then(response => {
                     context.commit('updateFilmList', response.data)
+            })
+        },
+        getFilmById (context, id) {
+            axios(
+                {
+                    method: "GET",
+                    "url": process.env.VUE_APP_API_URL + '/api/films?filter=id,' + id,
+                    "headers": {
+                        "Accept":        "application/json",
+                        "Authorization": "Bearer " + localStorage.token
+                    }
+                }
+            ).then(response => {
+                    context.commit('updateFilmView', response.data[0])
             })
         }
     }
