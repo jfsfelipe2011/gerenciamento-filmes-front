@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Films from '../views/Film'
 import Description from '../views/Description'
+import User from '../views/User'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/description/:filmId',
     name: 'description',
     component: Description
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: User
   }
 ]
 

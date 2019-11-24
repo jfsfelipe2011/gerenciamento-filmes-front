@@ -26,13 +26,15 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn v-if="film.stock.quantity > 0" class="ma-2" color="primary" dark>Alugar
-                    <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
-                  </v-btn>
+                  <form autocomplete="off" @submit.prevent="alugar(film)">
+                    <v-btn type="submit" v-if="film.stock.quantity > 0" class="ma-2" color="primary" dark>Alugar
+                      <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
+                    </v-btn>
 
-                  <v-btn v-else class="ma-2" color="default" dark disabled>Alugar
-                    <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
-                  </v-btn>
+                    <v-btn v-else class="ma-2" color="default" dark disabled>Alugar
+                      <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
+                    </v-btn>
+                  </form>
 
                   <v-btn icon>
                     <router-link :to="'/description/' + film.id" tag="li">
@@ -57,6 +59,35 @@
       flex: 3,
       urlBase: process.env.VUE_APP_STORAGE
     }),
+
+    methods: {
+      alugar: function (film) {
+        if (localStorage.filmsRented === undefined) {
+          let films = []
+          films[0] = film
+
+          localStorage.setItem("filmsRented", JSON.stringify(films))
+        } else {
+          let films = []
+          let count = 0
+
+          let filmsRented = JSON.parse(localStorage.getItem("filmsRented"))
+
+          filmsRented.forEach(function (filmRented) {
+            if (filmRented.id !== film.id) {
+              films[count] = filmRented
+              count++
+            }
+          })
+
+          films[count] = film
+
+          localStorage.setItem("filmsRented", JSON.stringify(films));
+        }
+
+        this.$router.push('/user')
+      }
+    },
 
     computed: {
       films () {
