@@ -27,9 +27,15 @@
                   <v-spacer></v-spacer>
 
                   <form autocomplete="off" @submit.prevent="alugar(film)">
-                    <v-btn type="submit" v-if="film.stock.quantity > 0" class="ma-2" color="primary" dark>Alugar
+                    <div v-if="film.stock">
+                      <v-btn type="submit" v-if="film.stock.quantity > 0" class="ma-2" color="primary" dark>Alugar
+                        <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
+                      </v-btn>
+
+                      <v-btn v-else class="ma-2" color="default" dark disabled>Alugar
                       <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
                     </v-btn>
+                    </div>
 
                     <v-btn v-else class="ma-2" color="default" dark disabled>Alugar
                       <v-icon dark right>mdi-checkbox-marked-circle</v-icon>

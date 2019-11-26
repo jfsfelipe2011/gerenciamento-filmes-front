@@ -6,8 +6,10 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import axios from 'axios'
 import VueStore from './vuex/store'
+import VueFlashMessage from 'vue-flash-message'
 
 Vue.use(Vuex)
+Vue.use(VueFlashMessage)
 
 let store = new Vuex.Store(VueStore)
 

@@ -8,9 +8,13 @@
                             height="600"
                             class="mx-auto card-principal"
                     >
+                        <div class="flash"> 
+                            <flash-message></flash-message>
+                        </div>
+
                         <form autocomplete="off" @submit.prevent="validar">
                             <v-text-field
-                                    v-model="document"
+                                    v-model="customer.document"
                                     label="Documento"
                                     placeholder="Digite seu documento"
                                     required
@@ -28,11 +32,47 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        data: () => ({
+            customer: {}
+        }),
+
+        methods: {
+            validar: function() {
+                let document = "" + this.customer.document
+
+                    this.flash('Documento inválido! ' + document.length < 0, 'error', {
+                        timeout: 2000
+                    })
+
+                    //return
+                
+
+                if (!Number.isInteger(parseInt(this.customer.document))) {
+                    this.flash('Documento deve ser numérico!! ', 'error', {
+                        timeout: 2000
+                    })
+
+                    return
+                }
+
+                this.flash('Documento: ' + this.customer.document, 'success', {
+                    timeout: 2000
+                })
+            }
+        }
+    }
 </script>
 
 <style>
     .card-principal {
         padding: 2%;
+    }
+
+    .flash {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+        padding-bottom: 2%;
     }
 </style>
