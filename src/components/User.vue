@@ -41,11 +41,13 @@
             validar: function() {
                 let document = "" + this.customer.document
 
-                    this.flash('Documento inválido! ' + document.length < 0, 'error', {
+                if (document.length !== 11) {
+                    this.flash('Documento inválido!', 'error', {
                         timeout: 2000
                     })
 
-                    //return
+                    return
+                }
                 
 
                 if (!Number.isInteger(parseInt(this.customer.document))) {
