@@ -135,12 +135,12 @@
                 localStorage.document = newCustomer.document
 
                 this.$store.dispatch('newCustomer', newCustomer)
-                    .then(() => {
+                    .then((response) => {
                         this.flash('Cadastrado com sucesso!', 'success', {
                             timeout: 3000
                         })
 
-                        return
+                        this.$router.push('/cart/' + response.data.document)
                     })
                     .catch(error => {
                         localStorage.error = error.response.data.document

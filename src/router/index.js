@@ -5,6 +5,7 @@ import Films from '../views/Film'
 import Description from '../views/Description'
 import User from '../views/User'
 import UserCreate from '../views/UserCreate'
+import Cart from '../views/Cart'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/user/create/:document',
     name: 'userCreate',
     component: UserCreate
+  },
+  {
+    path: '/cart/:document',
+    name: 'cart',
+    component: Cart
   }
 ]
 

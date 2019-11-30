@@ -52,7 +52,7 @@
     },
 
     data: () => ({
-      drawer: null,
+      drawer: null
     }),
 
     computed: {

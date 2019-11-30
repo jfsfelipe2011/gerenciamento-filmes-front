@@ -8,7 +8,7 @@
                             height="600"
                             class="mx-auto card-principal"
                     >
-                        <div class="flash"> 
+                        <div class="flash">
                             <flash-message></flash-message>
                         </div>
 
@@ -69,12 +69,18 @@
                         }
                     }
                 ).then(response => {
-                    localStorage.teste = response.data.name
+                    this.$router.push('/cart/' + response.data.document)
                 }).catch(error => {
                     localStorage.error = error
 
                     this.$router.push('/user/create/' + document)
                 })
+            }
+        },
+
+        created() {
+            if (localStorage.document !== undefined) {
+                this.$router.push('/cart/' + localStorage.document)
             }
         }
     }
