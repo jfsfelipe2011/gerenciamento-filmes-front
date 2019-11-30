@@ -5,9 +5,10 @@
                 <v-container fluid>
                     <v-card
                             max-width="800"
-                            height="600"
+                            height="700"
                             class="mx-auto card-principal"
                     >
+
                         <div class="flash">
                             <flash-message></flash-message>
                         </div>
@@ -121,9 +122,33 @@
                 this.address      = {}
             },
             cadastrar: function () {
-                this.flash('Cadastrado com sucesso!', 'success', {
-                    timeout: 3000
-                })
+                let address = this.address.street + ", " + this.address.number + " - " + this.customer.cep + " - "
+                + this.address.neighborhood + " / " + this.address.city + " " + this.address.state
+
+                let newCustomer = {
+                    name: this.customer.name,
+                    address: address,
+                    document: this.$route.params.document,
+                    payment: 'credit-card'
+                }
+
+                localStorage.document = newCustomer.document
+
+                this.$store.dispatch('newCustomer', newCustomer)
+                    .then(() => {
+                        this.flash('Cadastrado com sucesso!', 'success', {
+                            timeout: 3000
+                        })
+
+                        return
+                    })
+                    .catch(error => {
+                        localStorage.error = error.response.data.document
+
+                        this.flash('Erro ao cadastrar novo usuário, tente mais tarde!', 'error', {
+                            timeout: 3000
+                        })
+                    })
             }
         }
     }
