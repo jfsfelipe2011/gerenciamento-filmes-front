@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Films from '../views/Film'
 import Description from '../views/Description'
 import User from '../views/User'
+import UserCreate from '../views/UserCreate'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/user',
     name: 'user',
     component: User
+  },
+  {
+    path: '/user/create/:document',
+    name: 'userCreate',
+    component: UserCreate
   }
 ]
 

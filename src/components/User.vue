@@ -32,6 +32,8 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         data: () => ({
             customer: {}
@@ -39,27 +41,39 @@
 
         methods: {
             validar: function() {
-                let document = "" + this.customer.document
+                if (localStorage.filmsRented === undefined) {
+                    this.flash('Nenhum filme selecionado para aluguel!', 'error', {
+                        timeout: 3000
+                    })
+
+                    this.$router.push('/')
+                }
+
+                let document = "" + this.customer.document.replace(/[^0-9]/g,'');
 
                 if (document.length !== 11) {
                     this.flash('Documento inválido!', 'error', {
-                        timeout: 2000
-                    })
-
-                    return
-                }
-                
-
-                if (!Number.isInteger(parseInt(this.customer.document))) {
-                    this.flash('Documento deve ser numérico!! ', 'error', {
-                        timeout: 2000
+                        timeout: 3000
                     })
 
                     return
                 }
 
-                this.flash('Documento: ' + this.customer.document, 'success', {
-                    timeout: 2000
+                axios (
+                    {
+                        method: "GET",
+                        "url": process.env.VUE_APP_API_URL + '/api/customers/' + document,
+                        "headers": {
+                            "Accept":        "application/json",
+                            "Authorization": "Bearer " + localStorage.token
+                        }
+                    }
+                ).then(response => {
+                    localStorage.teste = response.data.name
+                }).catch(error => {
+                    localStorage.error = error
+
+                    this.$router.push('/user/create/' + document)
                 })
             }
         }

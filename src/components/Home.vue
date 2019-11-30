@@ -7,6 +7,10 @@
             Últimos filmes adicionados
           </h1>
 
+          <div class="flash">
+            <flash-message></flash-message>
+          </div>
+
           <v-row dense>
             <v-col
                     v-for="(film, index) in films"
@@ -106,3 +110,12 @@
     }
   }
 </script>
+
+<style>
+  .flash {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 2%;
+  }
+</style>
