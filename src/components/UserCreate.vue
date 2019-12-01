@@ -140,10 +140,12 @@
                             timeout: 3000
                         })
 
+                        localStorage.customerId = response.data.id
+
                         this.$router.push('/cart/' + response.data.document)
                     })
                     .catch(error => {
-                        localStorage.error = error.response.data.document
+                        localStorage.error = error
 
                         this.flash('Erro ao cadastrar novo usuário, tente mais tarde!', 'error', {
                             timeout: 3000

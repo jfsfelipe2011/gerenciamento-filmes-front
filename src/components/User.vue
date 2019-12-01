@@ -69,6 +69,8 @@
                         }
                     }
                 ).then(response => {
+                    localStorage.customerId = response.data.id
+
                     this.$router.push('/cart/' + response.data.document)
                 }).catch(error => {
                     localStorage.error = error
